@@ -25,6 +25,6 @@ router.get("/elements", (req, res) => {
     
 })
 
-router.get("/user", userRouter);
-router.get("/admin", adminRouter);
-router.get("/space", spaceRouter);
+router.use("/user", userRouter);
+router.use("/admin", adminRouter);
+router.use("/space", spaceRouter);
