@@ -18,7 +18,7 @@ export const updateMetadataSchema = z.object({
 export const createSpaceSchema = z.object({
     name: z.string(),
     dimensions: z.string().regex(/^[0-9]{1,4}x[0-9]{1,4}$/),
-    mapId: z.string()
+    mapId: z.string().optional()
 });
 
 export const addElementSchema = z.object({
@@ -34,6 +34,10 @@ export const createElementSchema = z.object({
     height: z.number(),
     static: z.boolean()
 });
+
+export const deleteElementSchema = z.object({
+    id: z.string()
+})
 
 export const updateElementSchema = z.object({
     imageUrl: z.string()
@@ -54,3 +58,5 @@ export const createMapSchema = z.object({
         y: z.number()
     }))
 });
+
+export const getUserIdsSchema = z.string().regex(/\b[a-z0-9]+\b/g);
