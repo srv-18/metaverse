@@ -20,11 +20,13 @@ export class User {
     private spaceId?: string;
     private x: number;
     private y: number;
+    private ws: WebSocket;
 
-    constructor(private ws: WebSocket) {
+    constructor(ws: WebSocket) {
         this.id = getRandomString(10);
         this.x = 0;
         this.y = 0;
+        this.ws = ws;
         this.initHandlers();
     }
 
@@ -63,7 +65,11 @@ export class User {
                                 x: this.x,
                                 y: this.y
                             },
-                            users: RoomManager.getInstance().rooms.get(spaceId)?.filter(u => u.id !== this.id)?.map(u => ({ id: u.id })) ?? []
+                            users: RoomManager.getInstance().rooms.get(spaceId)?.filter(u => u.id !== this.id)?.map(u => ({
+                                userId: u.userId,
+                                x: u.x,
+                                y: u.y
+                            })) ?? []
                         }
                     });
 
@@ -89,9 +95,9 @@ export class User {
                             type: "movement",
                             payload: {
                                 x: this.x,
-                                y: this.y
-                            },
-                            userId: this.userId
+                                y: this.y,
+                                userId: this.userId
+                            }
                         }, this, this.spaceId!);
                         return
                     }

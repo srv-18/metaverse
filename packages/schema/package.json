@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "exports": {
-    "./zodSchema": "./src/index.ts"
+    "./zodSchema": "./src/index.ts",
+    "./types": "./src/types.ts"
   },
   "keywords": [],
   "author": "",
